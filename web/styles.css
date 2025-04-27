@@ -7,6 +7,7 @@
   --light-text: #1a1a2e;
   --border-color: #32324f;
   --turbo-color: #ff7700;
+  --super-turbo-color: #ff0055;
   --input-bg: #333355;
   --success: #28a745;
   --warning: #ffc107;
@@ -169,6 +170,17 @@ body {
 .turbo-button.active {
   background-color: var(--turbo-color);
   color: white;
+}
+
+.turbo-button.super-active {
+  background-color: var(--super-turbo-color);
+  color: white;
+  border-color: var(--super-turbo-color);
+}
+
+.turbo-button.super-active:hover {
+  background-color: var(--super-turbo-color);
+  opacity: 0.9;
 }
 
 .turbo-icon {
@@ -410,6 +422,257 @@ body {
 
 .form-message a:hover {
   text-decoration: underline;
+}
+
+/* Settings Modal Styles */
+.settings-container {
+  margin-top: 1.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.settings-section {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.settings-section:last-child {
+  border-bottom: none;
+}
+
+.settings-section h3 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.settings-section h4 {
+  margin: 1rem 0;
+  color: var(--gray);
+}
+
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.toggle-info {
+  margin-left: 1rem;
+}
+
+.toggle-label {
+  font-weight: 500;
+}
+
+.toggle-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+
+/* Switch Toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray);
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:disabled + .slider {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Search Engine Selector */
+.search-engine-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-engine-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background-color: var(--dark-bg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-engine-option:hover {
+  background-color: rgba(74, 108, 247, 0.1);
+}
+
+.search-engine-option.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.engine-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Zero Rated Sites */
+.zero-rated-list {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.zero-rated-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--dark-bg);
+  border-radius: 4px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: var(--danger);
+}
+
+.add-zero-rated {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.add-zero-rated input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--dark-text);
+}
+
+/* Web Apps */
+.apps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.app-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: var(--dark-bg);
+  border-radius: 6px;
+}
+
+.app-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background-color: var(--dark-surface);
+  border-radius: 8px;
+}
+
+.app-info {
+  flex: 1;
+}
+
+.app-name {
+  font-weight: 500;
+}
+
+.app-url {
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+.no-apps-message {
+  color: var(--gray);
+  font-style: italic;
+  padding: 1rem 0;
+}
+
+/* Installation Instructions */
+.install-instructions {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--dark-bg);
+  border-radius: 8px;
+}
+
+.install-instructions h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.install-instructions ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.install-instructions li {
+  margin-bottom: 0.5rem;
+}
+
+.install-instructions button {
+  margin-top: 1rem;
 }
 
 /* Responsive Styles */
