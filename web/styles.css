@@ -67,6 +67,103 @@ body {
   gap: 0.75rem;
 }
 
+/* User Profile */
+.user-profile-container {
+  position: relative;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  transition: all 0.2s ease;
+}
+
+.profile-pic:hover {
+  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.5);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 250px;
+  background-color: var(--dark-surface);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  z-index: 100;
+  display: none;
+  border: 1px solid var(--border-color);
+}
+
+.user-profile:hover .profile-dropdown {
+  display: block;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dropdown-profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+  border: 2px solid var(--primary);
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.profile-email {
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  color: var(--dark-text);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: left;
+}
+
+.profile-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Button Styles */
 .button {
   padding: 0.5rem 1rem;
@@ -422,6 +519,57 @@ body {
 
 .form-message a:hover {
   text-decoration: underline;
+}
+
+/* Auth divider */
+.auth-divider {
+  position: relative;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.auth-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.auth-divider span {
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+  background-color: var(--dark-surface);
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Social Auth Buttons */
+.social-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.social-auth-btn svg {
+  margin-right: 0.75rem;
+}
+
+.google-auth:hover {
+  background-color: rgba(66, 133, 244, 0.1);
 }
 
 /* Settings Modal Styles */

@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let zeroRatedDomains = ['wikipedia.org', 'example.org', 'wikimedia.org']; // Example zero-rated sites
   let installedWebApps = []; // List of installed web applications
   
+  // Additional DOM elements for user profile
+  const userProfileContainer = document.getElementById('userProfileContainer');
+  const authButtonsContainer = document.getElementById('authButtonsContainer');
+  const googleLoginBtn = document.getElementById('googleLoginBtn');
+  const googleSignupBtn = document.getElementById('googleSignupBtn');
+  const profilePic = document.getElementById('profilePic');
+  const dropdownProfilePic = document.getElementById('dropdownProfilePic');
+  const profileName = document.getElementById('profileName');
+  const profileEmail = document.getElementById('profileEmail');
+  const logoutBtn = document.getElementById('logoutBtn');
+  
   // API base URL
   const API_BASE = '/api';
 
@@ -180,28 +191,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   
+  // Google auth functionality
+  googleLoginBtn.addEventListener('click', () => {
+    simulateGoogleLogin();
+  });
+  
+  googleSignupBtn.addEventListener('click', () => {
+    simulateGoogleLogin();
+  });
+  
+  // Function to simulate Google login for demo purposes
+  function simulateGoogleLogin() {
+    // This would normally open a popup to Google's OAuth service
+    setTimeout(() => {
+      // Simulate successful Google authentication
+      user = {
+        id: 123,
+        username: 'googleuser',
+        displayName: 'Google User',
+        email: 'user@gmail.com',
+        profilePicture: 'https://ui-avatars.com/api/?name=Google+User&background=4285F4&color=fff&size=100'
+      };
+      isLoggedIn = true;
+      
+      // Update UI
+      updateLoginState();
+      
+      // Close any open modals
+      closeModal(loginModal);
+      closeModal(signupModal);
+      
+      alert('Successfully signed in with Google!');
+    }, 1000);
+  }
+  
+  // Add event listener for logout button in profile dropdown
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogout);
+  }
+  
   // Update UI based on login state
   function updateLoginState() {
-    if (isLoggedIn) {
-      loginBtn.textContent = 'Logout';
-      loginBtn.removeEventListener('click', () => openModal(loginModal));
-      loginBtn.addEventListener('click', handleLogout);
+    if (isLoggedIn && user) {
+      // Hide auth buttons, show user profile
+      authButtonsContainer.style.display = 'none';
+      userProfileContainer.style.display = 'block';
       
-      signupBtn.textContent = user.displayName;
-      signupBtn.classList.remove('primary');
-      signupBtn.classList.add('secondary');
-      signupBtn.removeEventListener('click', () => openModal(signupModal));
-      signupBtn.addEventListener('click', openUserSettings);
+      // Update profile information
+      profilePic.src = user.profilePicture || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName) + '&background=4a6cf7&color=fff&size=100';
+      dropdownProfilePic.src = user.profilePicture || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName) + '&background=4a6cf7&color=fff&size=100';
+      profileName.textContent = user.displayName;
+      profileEmail.textContent = user.email;
     } else {
-      loginBtn.textContent = 'Login';
-      loginBtn.removeEventListener('click', handleLogout);
-      loginBtn.addEventListener('click', () => openModal(loginModal));
-      
-      signupBtn.textContent = 'Sign Up';
-      signupBtn.classList.add('primary');
-      signupBtn.classList.remove('secondary');
-      signupBtn.removeEventListener('click', openUserSettings);
-      signupBtn.addEventListener('click', () => openModal(signupModal));
+      // Show auth buttons, hide user profile
+      authButtonsContainer.style.display = 'flex';
+      userProfileContainer.style.display = 'none';
     }
   }
   
@@ -209,7 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
     isLoggedIn = false;
     user = null;
     localStorage.removeItem('token');
+    
+    // Update UI state
     updateLoginState();
+    
+    // Redirect to welcome screen
+    document.querySelector('.welcome-screen').style.display = 'flex';
+    document.querySelector('.browser-iframe-container').style.display = 'none';
   }
   
   function openUserSettings() {
