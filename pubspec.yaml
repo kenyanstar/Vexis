@@ -1,0 +1,58 @@
+name: vexis_browser
+description: VEXIS Browser - Powerful browser with Turbo Mode, extensions support, and privacy features
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+  
+  # UI and Animation
+  google_fonts: ^4.0.4
+  flutter_svg: ^2.0.5
+  lottie: ^2.3.2
+  
+  # State management
+  provider: ^6.0.5
+  get_it: ^7.6.0
+  
+  # Local storage
+  shared_preferences: ^2.1.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  # WebView
+  webview_flutter: ^4.2.0
+  
+  # HTTP and API
+  http: ^0.13.6
+  dio: ^5.1.2
+  
+  # Authentication
+  local_auth: ^2.1.6
+  
+  # Utilities
+  url_launcher: ^6.1.11
+  connectivity_plus: ^4.0.1
+  path_provider: ^2.0.15
+  intl: ^0.18.1
+  flutter_inappwebview: ^5.7.2+3
+  
+  # UI Elements
+  flutter_feather_icons: ^2.0.0+1
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.3
+  hive_generator: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/animations/
