@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 const { drizzle } = require('drizzle-orm/pg-pool');
-const schema = require("../shared/schema");
+const schema = require("../shared/schema.js");
 
 if (!process.env.DATABASE_URL) {
   throw new Error(

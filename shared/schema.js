@@ -25,7 +25,7 @@ const userPreferences = pgTable('user_preferences', {
 });
 
 // Browsing history table
-export const browsingHistory = pgTable('browsing_history', {
+const browsingHistory = pgTable('browsing_history', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   url: text('url').notNull(),
@@ -35,7 +35,7 @@ export const browsingHistory = pgTable('browsing_history', {
 });
 
 // Bookmarks table
-export const bookmarks = pgTable('bookmarks', {
+const bookmarks = pgTable('bookmarks', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   folderId: integer('folder_id').references(() => bookmarkFolders.id, { onDelete: 'set null' }),
@@ -46,7 +46,7 @@ export const bookmarks = pgTable('bookmarks', {
 });
 
 // Bookmark folders table
-export const bookmarkFolders = pgTable('bookmark_folders', {
+const bookmarkFolders = pgTable('bookmark_folders', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   parentFolderId: integer('parent_folder_id').references(() => bookmarkFolders.id, { onDelete: 'set null' }),
@@ -55,7 +55,7 @@ export const bookmarkFolders = pgTable('bookmark_folders', {
 });
 
 // Downloads table
-export const downloads = pgTable('downloads', {
+const downloads = pgTable('downloads', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   url: text('url').notNull(),
@@ -68,7 +68,7 @@ export const downloads = pgTable('downloads', {
 });
 
 // Define relations
-export const usersRelations = relations(users, ({ many }) => ({
+const usersRelations = relations(users, ({ many }) => ({
   preferences: many(userPreferences),
   history: many(browsingHistory),
   bookmarks: many(bookmarks),
@@ -76,7 +76,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   downloads: many(downloads),
 }));
 
-export const bookmarksRelations = relations(bookmarks, ({ one }) => ({
+const bookmarksRelations = relations(bookmarks, ({ one }) => ({
   user: one(users, {
     fields: [bookmarks.userId],
     references: [users.id],
@@ -87,7 +87,7 @@ export const bookmarksRelations = relations(bookmarks, ({ one }) => ({
   }),
 }));
 
-export const bookmarkFoldersRelations = relations(bookmarkFolders, ({ one, many }) => ({
+const bookmarkFoldersRelations = relations(bookmarkFolders, ({ one, many }) => ({
   user: one(users, {
     fields: [bookmarkFolders.userId],
     references: [users.id],
@@ -100,16 +100,15 @@ export const bookmarkFoldersRelations = relations(bookmarkFolders, ({ one, many 
   bookmarks: many(bookmarks),
 }));
 
-// TypeScript types
-export type User = typeof users.$inferSelect;
-export type InsertUser = typeof users.$inferInsert;
-export type UserPreference = typeof userPreferences.$inferSelect;
-export type InsertUserPreference = typeof userPreferences.$inferInsert;
-export type BrowsingHistory = typeof browsingHistory.$inferSelect;
-export type InsertBrowsingHistory = typeof browsingHistory.$inferInsert;
-export type Bookmark = typeof bookmarks.$inferSelect;
-export type InsertBookmark = typeof bookmarks.$inferInsert;
-export type BookmarkFolder = typeof bookmarkFolders.$inferSelect;
-export type InsertBookmarkFolder = typeof bookmarkFolders.$inferInsert;
-export type Download = typeof downloads.$inferSelect;
-export type InsertDownload = typeof downloads.$inferInsert;
+// Export everything
+module.exports = {
+  users,
+  userPreferences,
+  browsingHistory,
+  bookmarks,
+  bookmarkFolders,
+  downloads,
+  usersRelations,
+  bookmarksRelations,
+  bookmarkFoldersRelations
+};
