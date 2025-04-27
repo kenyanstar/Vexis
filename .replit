@@ -14,23 +14,36 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "VEXIS Browser"
+args = "API Server"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "API Server"
+args = "Web UI"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "VEXIS Server"
 
 [[workflows.workflow]]
-name = "VEXIS Browser"
+name = "API Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "flutter run -d web-server --web-port=5000 --web-hostname=0.0.0.0"
+args = "node server/api.js"
+waitForPort = 3000
+
+[[workflows.workflow]]
+name = "Web UI"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node server/web-server.js"
 waitForPort = 5000
 
 [[workflows.workflow]]
-name = "API Server"
+name = "VEXIS Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
@@ -40,6 +53,10 @@ waitForPort = 5000
 
 [deployment]
 run = ["sh", "-c", "flutter run -d web-server --web-port=5000 --web-hostname=0.0.0.0"]
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
 
 [[ports]]
 localPort = 5000
