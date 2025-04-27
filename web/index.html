@@ -1,38 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
-
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="VEXIS Browser - Powerful browser with Turbo Mode, extensions support, and privacy features">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="workspace">
+  <meta name="apple-mobile-web-app-title" content="VEXIS Browser">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>workspace</title>
+  <title>VEXIS Browser</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Custom styles -->
+  <style>
+    body {
+      background-color: #0A0A0A;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: white;
+    }
+    
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+    }
+    
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #005DFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 40px;
+    }
+    
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 40px;
+    }
+    
+    .feature-list {
+      margin: 30px 0;
+      text-align: left;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .feature-icon {
+      color: #005DFF;
+      margin-right: 10px;
+    }
+    
+    .button {
+      background-color: #005DFF;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .button:hover {
+      background-color: #0041B3;
+    }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <div class="container">
+    <div class="logo">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L19 21H5L12 2Z" stroke="#005DFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <h1 class="title">VEXIS Browser</h1>
+    <p class="subtitle">Your Ultimate Browser Experience</p>
+    
+    <div class="feature-list">
+      <div class="feature-item">
+        <span class="feature-icon">✓</span>
+        <span>Turbo Mode for faster browsing</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">✓</span>
+        <span>Biometric authentication</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">✓</span>
+        <span>Dark theme interface</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">✓</span>
+        <span>Super Turbo Mode (hidden feature)</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">✓</span>
+        <span>Tab management</span>
+      </div>
+    </div>
+    
+    <button class="button">Start Browsing</button>
+  </div>
 </body>
 </html>
