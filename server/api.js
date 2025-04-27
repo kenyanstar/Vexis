@@ -12,13 +12,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('web')); // Serve static files from 'web' directory
 
-// DB Initialization (we'll import from our module later)
+// DB Initialization
 let db = null;
 const initDb = async () => {
   try {
-    const { pool } = require('./db');
+    // Use regular module.exports style
+    const db = require('./db.js');
     // Verify DB connection
-    await pool.query('SELECT NOW()');
+    await db.pool.query('SELECT NOW()');
     console.log('Database connection successful');
   } catch (error) {
     console.error('Database connection error:', error);

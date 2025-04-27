@@ -1,6 +1,6 @@
-import { Pool } from 'pg';
-import { drizzle } from 'drizzle-orm/pg-core';
-import * as schema from "../shared/schema";
+const { Pool } = require('pg');
+const { drizzle } = require('drizzle-orm/pg-pool');
+const schema = require("../shared/schema");
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
@@ -8,5 +8,10 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle(pool, { schema });
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const db = drizzle(pool, { schema });
+
+module.exports = {
+  pool,
+  db
+};

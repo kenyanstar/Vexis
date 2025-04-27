@@ -1,6 +1,6 @@
 // Simple migration script to create database tables directly
 require('dotenv').config();
-const { Pool } = require('@neondatabase/serverless');
+const { Pool } = require('pg');
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
