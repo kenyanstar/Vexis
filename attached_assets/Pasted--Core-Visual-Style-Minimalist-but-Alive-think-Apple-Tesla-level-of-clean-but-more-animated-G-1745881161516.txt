@@ -1,0 +1,74 @@
+✨ Core Visual Style
+Minimalist but Alive — think Apple + Tesla level of clean, but more animated.
+
+Glassmorphism (blurred, translucent backgrounds).
+
+Dark Mode default, but light mode is elegant, not boring.
+
+Neon accent colors (customizable): soft glows of blue, pink, purple, green.
+
+Smooth micro-animations — buttons ripple softly when clicked, tabs open with slight "spring" movement.
+
+Fonts: use futuristic but readable fonts like Inter, Satoshi, or even a custom Nova typeface.
+
+🖥 Page/Screen Concepts:
+🏠 Home/New Tab Page
+
+Top: Large clock & weather widget (sleek, semi-transparent).
+Center: AI "command bar" to type anything — site search, web search, action shortcuts.
+Bottom: Smart "Launchpads" — auto-arranging your favorite apps/sites.
+Background: Dynamic animated wallpapers (live 3D space themes, minimal nature, etc.)
+🧩 Extensions/Apps Store
+
+A marketplace with cards floating in a 3D space.
+Hovering a card would tilt/shine slightly.
+Install apps with one click, no ugly reloads.
+"Editor’s Picks" curated by an AI, updated weekly based on trends.
+🌍 Tabs/Window Design
+
+Tabs are rounded rectangles, hovering shows full live preview (mini window).
+Multi-tab view: like a gallery, not messy tiny strips.
+Group tabs into "Sessions" with color-coded folders.
+🧠 AI Features
+Built-in Assistant: Summarize articles, explain websites, find better prices automatically.
+
+Voice Navigation: Say "Go to GitHub and open trending repos" — done.
+
+Offline AI Mode: preloads and allows offline summarization, translation.
+
+⚡ Performance/Usability Features
+Ultra fast startup (<1 sec open from cold).
+
+Minimal memory usage — no background garbage.
+
+Privacy first: No tracking unless explicitly allowed. (Position against Chrome strongly.)
+
+🎨 Quick Visual Sketch (Text Form)
+markdown
+Copy
+Edit
+--------------------------------------------------------
+|  ☀  11:02 AM - 22°C - Cloudy                         |
+|                                                      |
+|         [ Search, Navigate, Command... ]             |
+|                                                      |
+|  + Gmail     + Twitter   + Figma    + ChatGPT        |
+|  + Nova App  + Docs      + YouTube  + Reddit         |
+|                                                      |
+|  🌌 Dynamic cosmic background (gently moving stars) |
+--------------------------------------------------------
+🎯 Selling Points
+"The browser that works for you, not against you."
+
+"Designed to be felt, not fought."
+
+"Nova — The Future of Browsing."
+
+⚙️ Advanced:
+Later versions could include:
+
+Crypto wallet support natively built-in.
+
+Decentralized web features (IPFS, Web3 browsing).
+
+Split-screen browsing (2-3 websites side-by-side natively, drag & resize).

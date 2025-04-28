@@ -1,5 +1,12 @@
 // VEXIS Browser Main JavaScript
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize the star background
+  initStarsBackground();
+  
+  // Start the clock
+  updateClock();
+  setInterval(updateClock, 1000);
+
   // DOM elements
   const loginBtn = document.getElementById('loginBtn');
   const signupBtn = document.getElementById('signupBtn');
@@ -21,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const browserIframe = document.getElementById('browserIframe');
   const searchInput = document.getElementById('searchInput');
   const searchBtn = document.getElementById('searchBtn');
+  const commandInput = document.getElementById('commandInput');
+  const commandBtn = document.getElementById('commandBtn');
   
   // Footer elements
   const historyBtn = document.getElementById('historyBtn');
@@ -88,6 +97,85 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal(modal);
     });
   });
+  
+  // Stars background animation
+  function initStarsBackground() {
+    const starsContainer = document.getElementById('starsBackground');
+    if (!starsContainer) return;
+    
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    
+    // Create stars
+    for (let i = 0; i < 100; i++) {
+      createStar(starsContainer, screenWidth, screenHeight);
+    }
+    
+    // Add shooting stars
+    for (let i = 0; i < 3; i++) {
+      createShootingStar(starsContainer, screenWidth, screenHeight);
+      // Create new shooting stars periodically
+      setInterval(() => {
+        createShootingStar(starsContainer, screenWidth, screenHeight);
+      }, 5000 + Math.random() * 10000); // Random interval between 5 and 15 seconds
+    }
+  }
+  
+  function createStar(container, maxWidth, maxHeight) {
+    const star = document.createElement('div');
+    star.className = 'star ' + (Math.random() > 0.8 ? 'large' : (Math.random() > 0.5 ? 'medium' : 'small'));
+    
+    // Random position
+    star.style.left = Math.random() * maxWidth + 'px';
+    star.style.top = Math.random() * maxHeight + 'px';
+    
+    // Random animation delay
+    star.style.animationDelay = Math.random() * 5 + 's';
+    star.style.animationDuration = 3 + Math.random() * 4 + 's';
+    
+    container.appendChild(star);
+    return star;
+  }
+  
+  function createShootingStar(container, maxWidth, maxHeight) {
+    const star = document.createElement('div');
+    star.className = 'star shooting';
+    
+    // Random starting position on left side
+    star.style.left = Math.random() * (maxWidth / 4) + 'px';
+    star.style.top = Math.random() * maxHeight / 2 + 'px';
+    
+    // Random animation duration
+    star.style.animationDuration = 2 + Math.random() * 4 + 's';
+    
+    container.appendChild(star);
+    
+    // Remove the shooting star after animation completes
+    setTimeout(() => {
+      if (container.contains(star)) {
+        container.removeChild(star);
+      }
+    }, parseFloat(star.style.animationDuration) * 1000);
+    
+    return star;
+  }
+  
+  // Clock update function
+  function updateClock() {
+    const clockDisplay = document.getElementById('clockDisplay');
+    if (!clockDisplay) return;
+    
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+    // Convert to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 should be 12
+    
+    clockDisplay.textContent = `${hours}:${minutes} ${ampm}`;
+  }
   
   // Close modal when clicking outside
   window.addEventListener('click', (e) => {
@@ -531,6 +619,113 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+  });
+  
+  // Command bar functionality
+  if (commandInput) {
+    commandInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleCommand(commandInput.value);
+      }
+    });
+  }
+  
+  if (commandBtn) {
+    commandBtn.addEventListener('click', () => {
+      handleCommand(commandInput.value);
+    });
+  }
+  
+  function handleCommand(command) {
+    if (!command) return;
+    
+    // Special commands
+    if (command.startsWith('/')) {
+      const specialCommand = command.substring(1).toLowerCase();
+      
+      switch (specialCommand) {
+        case 'turbo':
+          toggleTurboMode();
+          alert('Turbo Mode ' + (isTurboMode ? 'enabled' : 'disabled'));
+          break;
+        case 'superturbo':
+          isTurboMode = true;
+          isSuperTurboMode = true;
+          turboBtn.classList.add('active');
+          turboBtn.classList.add('super-active');
+          alert('Super Turbo Mode enabled');
+          break;
+        case 'settings':
+          openSettingsModal();
+          break;
+        case 'history':
+          alert('Browsing history: ' + browsingHistory.join(', '));
+          break;
+        case 'bookmarks':
+          alert('Bookmarks feature will be available soon');
+          break;
+        case 'downloads':
+          alert('Downloads feature will be available soon');
+          break;
+        case 'help':
+          alert('VEXIS Browser Command Help:\n/turbo - Toggle Turbo Mode\n/superturbo - Enable Super Turbo Mode\n/settings - Open Settings\n/history - Show History\n/bookmarks - Show Bookmarks\n/downloads - Show Downloads\n/help - Show this help');
+          break;
+        default:
+          // Check if it's a URL first
+          if (/^(http|https):\/\//.test(command) || /^[\w-]+(\.[\w-]+)+/.test(command)) {
+            navigateTo(command);
+          } else {
+            // Use the selected search engine
+            navigateTo(getSearchUrl(command));
+          }
+      }
+    } else {
+      // Check if it's a URL first
+      if (/^(http|https):\/\//.test(command) || /^[\w-]+(\.[\w-]+)+/.test(command)) {
+        navigateTo(command);
+      } else {
+        // Use the selected search engine
+        navigateTo(getSearchUrl(command));
+      }
+    }
+    
+    // Clear command input after executing
+    if (commandInput) {
+      commandInput.value = '';
+    }
+  }
+  
+  // App tile click handlers
+  document.querySelectorAll('.app-tile').forEach(tile => {
+    tile.addEventListener('click', function() {
+      const appName = this.querySelector('span').textContent;
+      switch (appName) {
+        case 'Gmail':
+          navigateTo('https://mail.google.com');
+          break;
+        case 'Twitter':
+          navigateTo('https://twitter.com');
+          break;
+        case 'DevTools':
+          alert('Developer Tools will open in a dedicated panel in the full version');
+          break;
+        case 'YouTube':
+          navigateTo('https://youtube.com');
+          break;
+        case 'Figma':
+          navigateTo('https://figma.com');
+          break;
+        case 'GitHub':
+          navigateTo('https://github.com');
+          break;
+        case 'Chrome':
+          navigateTo('https://google.com');
+          break;
+        case 'Add':
+          alert('You can add your favorite apps here in the full version');
+          break;
+      }
+    });
   });
   
   backBtn.addEventListener('click', () => {
